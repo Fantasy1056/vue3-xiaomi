@@ -11,7 +11,6 @@ import BoxBd from './BoxBd.vue'
 import { defineProps } from 'vue'
 defineProps(['type', 'goods', 'title'])
 </script>
-
 <style lang="less" scoped>
 .home-brick-box {
   width: 100%;
