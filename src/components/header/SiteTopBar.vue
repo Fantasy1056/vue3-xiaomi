@@ -72,6 +72,10 @@ getsiteUserInfo()
           font-size: 12px;
           color: #b0b0b0;
           line-height: 40px;
+          transition: color 0.3s linear;
+          &:hover {
+            color: #fff;
+          }
         }
         .sep {
           display: inline-block;

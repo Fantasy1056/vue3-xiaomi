@@ -8,6 +8,7 @@ import homeChannel from './data/home-channel'
 import promoList from './data/promo-list'
 import brickPromoList from './data/brick-promo-list'
 import goodsList from './data/goods-list'
+import serviceLinks from './data/service-links'
 Mock.setup({
   timeout: '50-1000'
 })
@@ -73,5 +74,12 @@ Mock.mock(/\/goodslist/, 'get', ({ url }) => {
   return {
     code: 200,
     res: goodsList[classify]
+  }
+})
+
+Mock.mock(/\/servicelist/, 'get', () => {
+  return {
+    code: 200,
+    res: serviceLinks
   }
 })

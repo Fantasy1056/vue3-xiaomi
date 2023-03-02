@@ -127,6 +127,10 @@ getCategoryList()
               .site-category-item {
                 width: 100%;
                 height: 42px;
+                transition: background-color 0.1s linear;
+                &:hover {
+                  background-color: #ff6700;
+                }
                 .link {
                   display: block;
                   padding-left: 30px;
@@ -141,11 +145,16 @@ getCategoryList()
         }
         .nav-item {
           float: left;
+
           .link {
             display: block;
             padding: 26px 10px 38px;
             color: #333;
             font-size: 16px;
+            transition: color 0.1s linear;
+            &:hover {
+              color: #ff6700;
+            }
           }
         }
       }
