@@ -9,6 +9,7 @@ html,body,#app {
 }
 .container{
   width: 1226px;
+  min-width: 1226px;
   margin: 0 auto;
 }
 a {
@@ -23,4 +24,16 @@ a {
 }
 li {
   list-style: none;
+}
+.span4 {
+  width: 234px;
+  height: 100%;
+  float: left;
+}
+.span16 {
+  width: 978px;
+  height: 100%;
+
+  float: left;
+  margin-left: 14px;
 }

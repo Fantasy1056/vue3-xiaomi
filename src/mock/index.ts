@@ -6,6 +6,8 @@ import swiperlist from './data/swiperlist'
 import categoryList from './data/category-list'
 import homeChannel from './data/home-channel'
 import promoList from './data/promo-list'
+import brickPromoList from './data/brick-promo-list'
+import goodsList from './data/goods-list'
 Mock.setup({
   timeout: '50-1000'
 })
@@ -50,5 +52,26 @@ Mock.mock(/\/promolist/, 'get', () => {
   return {
     code: 200,
     res: promoList
+  }
+})
+
+Mock.mock(/\/brickpromolist/, 'get', ({ url }) => {
+  const queryStr = url.split('?')[1]
+  const queryParams = new URLSearchParams(queryStr)
+  const classify: string = queryParams.get('classify') as string
+
+  return {
+    code: 200,
+    res: brickPromoList[classify]
+  }
+})
+
+Mock.mock(/\/goodslist/, 'get', ({ url }) => {
+  const queryStr = url.split('?')[1]
+  const queryParams = new URLSearchParams(queryStr)
+  const classify: string = queryParams.get('classify') as string
+  return {
+    code: 200,
+    res: goodsList[classify]
   }
 })

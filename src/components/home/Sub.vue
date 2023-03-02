@@ -63,7 +63,9 @@ const getChannelList = async () => {
 }
 getChannelList()
 const getPromolList = async () => {
-  const { data: res } = await $http.get('/promolist')
+  const { data: res } = await $http.get('/promolist', {
+    params: { id: '1', name: 'wp' }
+  })
   promoList.value = res.res
 }
 getPromolList()
@@ -156,7 +158,7 @@ const highLightCh = (index: string) => {
         }
       }
       .high-light {
-        box-shadow: 1px 2px 5px 0px rgba(0, 0, 0, 0.5);
+        box-shadow: 5px 2px 15px 2px rgba(0, 0, 0, 0.5);
       }
       .frist {
         margin-left: 0;
