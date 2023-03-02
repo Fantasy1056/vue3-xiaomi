@@ -1,12 +1,26 @@
 <template>
   <div class="site-header">
-    <div class="container default-width">
+    <div class="container">
       <div class="header-log">
         <a href="#" class="logo"></a>
       </div>
       <div class="header-nav">
         <div class="nav-list">
-          <li class="nav-category"></li>
+          <li class="nav-category">
+            <div class="site-category">
+              <ul class="site-category-list">
+                <li
+                  class="site-category-item"
+                  v-for="item in categoryList"
+                  :key="item.id"
+                >
+                  <a href="" class="link">
+                    {{ item.text }}
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </li>
           <li
             class="nav-item"
             v-for="(item, index) in navList"
@@ -43,7 +57,14 @@ const getNavList = async () => {
   const { data: res } = await $http.get('/navlist')
   navList.value = res.res
 }
+
+const categoryList = ref<Nav[]>([])
+const getCategoryList = async () => {
+  const { data: res } = await $http.get('/categorylist')
+  categoryList.value = res.res
+}
 getNavList()
+getCategoryList()
 </script>
 
 <style lang="less" scoped>
@@ -52,7 +73,6 @@ getNavList()
   height: 100px;
   .container {
     height: 100%;
-    margin: 0 auto;
     .header-log {
       float: left;
       width: 62px;
@@ -86,10 +106,38 @@ getNavList()
         height: 100%;
         padding: 12px 0 0 30px;
         .nav-category {
+          position: relative;
           float: left;
           width: 142px;
           height: 88px;
           padding-right: 15px;
+          .site-category {
+            position: absolute;
+            top: 88px;
+            left: -92px;
+            width: 234px;
+            height: 460px;
+            background: rgba(105, 101, 101, 0.6);
+            padding: 20px 0;
+            font-size: 14px;
+            z-index: 21;
+            .site-category-list {
+              width: 100%;
+              height: 100%;
+              .site-category-item {
+                width: 100%;
+                height: 42px;
+                .link {
+                  display: block;
+                  padding-left: 30px;
+                  width: 100%;
+                  height: 42px;
+                  line-height: 42px;
+                  color: #fff;
+                }
+              }
+            }
+          }
         }
         .nav-item {
           float: left;

@@ -1,6 +1,6 @@
 <template>
   <div class="site-topbar">
-    <div class="container default-width">
+    <div class="container">
       <div class="topbar-nav">
         <div v-for="nav in navList" :key="nav.id" class="link">
           <a href="#" class="nofollow">{{ nav.text }}</a>
@@ -58,7 +58,6 @@ getsiteUserInfo()
   background-color: #333;
   .container {
     height: 100%;
-    margin: 0 auto;
     .topbar-nav,
     .topbar-info {
       float: left;
