@@ -1,7 +1,7 @@
 <template>
   <div class="side-bar">
     <a
-      href=""
+      href="javascript:;"
       class="item"
       v-for="(item, index) in sideBarList"
       :key="index"
