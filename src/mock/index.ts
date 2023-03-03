@@ -9,6 +9,7 @@ import promoList from './data/promo-list'
 import brickPromoList from './data/brick-promo-list'
 import goodsList from './data/goods-list'
 import serviceLinks from './data/service-links'
+import drawerItemList from './data/drawer-item-list'
 Mock.setup({
   timeout: '50-1000'
 })
@@ -81,5 +82,15 @@ Mock.mock(/\/servicelist/, 'get', () => {
   return {
     code: 200,
     res: serviceLinks
+  }
+})
+Mock.mock(/\/draweritemlist/, 'get', ({ url }) => {
+  const queryStr = url.split('?')[1]
+  const queryParams = new URLSearchParams(queryStr)
+  const index: number = parseInt(queryParams.get('index') as string)
+
+  return {
+    code: 200,
+    res: drawerItemList[index]
   }
 })
