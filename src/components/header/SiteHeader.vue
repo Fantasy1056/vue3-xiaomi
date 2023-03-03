@@ -1,11 +1,8 @@
 <template>
   <div class="site-header" @mouseleave="drawer = false">
     <transition>
-      <SiteHeaderDrawer
-        v-show="drawer"
-        @mouseleave="drawer = false"
-        :drawerList="drawerItemList"
-      ></SiteHeaderDrawer>
+      <SiteHeaderDrawer v-show="drawer" @mouseleave="drawer = false">
+      </SiteHeaderDrawer>
     </transition>
 
     <div class="container">
@@ -15,19 +12,7 @@
       <div class="header-nav">
         <div class="nav-list">
           <li class="nav-category">
-            <div class="site-category">
-              <ul class="site-category-list">
-                <li
-                  class="site-category-item"
-                  v-for="item in categoryList"
-                  :key="item.id"
-                >
-                  <a href="" class="link">
-                    {{ item.text }}
-                  </a>
-                </li>
-              </ul>
-            </div>
+            <SiteCategory></SiteCategory>
           </li>
           <li
             class="nav-item"
@@ -39,6 +24,12 @@
             <a href="#" class="link">
               <span>{{ item.text }}</span>
             </a>
+            <teleport to=".site-header-drawer">
+              <ItemChildren
+                :drawerList="drawerItemList[index]"
+                v-show="drawerIndex === index"
+              ></ItemChildren>
+            </teleport>
           </li>
         </div>
       </div>
@@ -57,6 +48,8 @@
 <script lang="ts" setup>
 import $http from '@/utils/Axios'
 import SiteHeaderDrawer from './SiteHeaderDrawer.vue'
+import SiteCategory from './SiteCategory.vue'
+import ItemChildren from './ItemChildren.vue'
 import { ref } from 'vue'
 interface Nav {
   id: string
@@ -70,24 +63,19 @@ interface DraweItem {
 }
 const navList = ref<Nav[]>([])
 const drawer = ref(false)
-const drawerIndex = ref(0)
+const drawerIndex = ref(-1)
 const drawerItemList = ref<DraweItem[]>([])
 const getNavList = async () => {
   const { data: res } = await $http.get('/navlist')
   navList.value = res.res
 }
 
-const categoryList = ref<Nav[]>([])
-const getCategoryList = async () => {
-  const { data: res } = await $http.get('/categorylist')
-  categoryList.value = res.res
-}
-
 const openDrawer = (index: number) => {
-  if (index !== 8 && index !== 9) {
+  if (index !== 7 && index !== 8) {
     drawer.value = true
     drawerIndex.value = index
-    getDrawerItems()
+  } else {
+    drawer.value = false
   }
 }
 const getDrawerItems = async () => {
@@ -96,8 +84,8 @@ const getDrawerItems = async () => {
   })
   drawerItemList.value = res.res
 }
+
 getNavList()
-getCategoryList()
 getDrawerItems()
 </script>
 
@@ -107,6 +95,7 @@ getDrawerItems()
   width: 100%;
   height: 100px;
   z-index: 100;
+
   .container {
     height: 100%;
     .header-log {
@@ -137,6 +126,7 @@ getDrawerItems()
       float: left;
       width: 850px;
       .nav-list {
+        position: relative;
         float: left;
         width: 1100px;
         height: 100%;
@@ -147,37 +137,6 @@ getDrawerItems()
           width: 142px;
           height: 88px;
           padding-right: 15px;
-          .site-category {
-            position: absolute;
-            top: 88px;
-            left: -92px;
-            width: 234px;
-            height: 460px;
-            background: rgba(105, 101, 101, 0.6);
-            padding: 20px 0;
-            font-size: 14px;
-            z-index: 21;
-            .site-category-list {
-              width: 100%;
-              height: 100%;
-              .site-category-item {
-                width: 100%;
-                height: 42px;
-                transition: background-color 0.1s linear;
-                &:hover {
-                  background-color: #ff6700;
-                }
-                .link {
-                  display: block;
-                  padding-left: 30px;
-                  width: 100%;
-                  height: 42px;
-                  line-height: 42px;
-                  color: #fff;
-                }
-              }
-            }
-          }
         }
         .nav-item {
           float: left;
