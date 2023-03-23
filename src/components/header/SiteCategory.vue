@@ -1,5 +1,5 @@
 <template>
-  <div class="site-category">
+  <div class="site-category" v-if="route.meta.showSiteCategory">
     <ul class="site-category-list" @mouseleave="cateIndex = -1">
       <li
         class="site-category-item"
@@ -33,6 +33,7 @@
 <script lang="ts" setup>
 import { ref } from 'vue'
 import $http from '@/utils/Axios'
+import { useRoute } from 'vue-router'
 interface Nav {
   id: string
   text: string
@@ -48,6 +49,8 @@ interface CategoryItem {
 const cateIndex = ref<number>(-1)
 const categoryList = ref<Nav[]>([])
 const category = ref<CategoryItem[]>([])
+const route = useRoute()
+
 const getCategoryList = async () => {
   const { data: res } = await $http.get('/categorylist')
   categoryList.value = res.res

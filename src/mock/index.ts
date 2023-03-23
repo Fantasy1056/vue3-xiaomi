@@ -11,6 +11,7 @@ import goodsList from './data/goods-list'
 import serviceLinks from './data/service-links'
 import drawerItemList from './data/drawer-item-list'
 import category from './data/category'
+import goodsDetail from './data/goods-detail'
 Mock.setup({
   timeout: '50-1000'
 })
@@ -95,5 +96,15 @@ Mock.mock(/\/category/, 'get', () => {
   return {
     code: 200,
     res: category
+  }
+})
+Mock.mock(/\/goodsdetail/, 'get', ({ url }) => {
+  const queryStr = url.split('?')[1]
+  const queryParams = new URLSearchParams(queryStr)
+  const id: string = queryParams.get('id') as string
+
+  return {
+    code: 200,
+    res: goodsDetail.find(item => item.id === id)
   }
 })

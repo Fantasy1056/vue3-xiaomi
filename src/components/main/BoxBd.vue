@@ -24,7 +24,7 @@
             v-for="item in list"
             :key="item.id"
           >
-            <a href="#">
+            <router-link :to="`/shop/buy/${item.id}`">
               <div class="figure-img">
                 <img :src="item.goodsPicUrl" alt="" />
               </div>
@@ -38,7 +38,7 @@
                   >元<span></span>
                 </del>
               </p>
-            </a>
+            </router-link>
           </li>
         </ul>
       </div>
