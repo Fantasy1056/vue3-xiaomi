@@ -2,6 +2,7 @@
   <div class="box-bd">
     <div class="span4">
       <ul class="brick-promo-list">
+        <!-- 根据侧边商品列表长度，切换绑定的class -->
         <li
           class="brick-item"
           v-for="p in brickPromoList"
@@ -24,6 +25,7 @@
             v-for="item in list"
             :key="item.id"
           >
+            <!-- 根据商品id跳转到对应的商品详情页面 -->
             <router-link :to="`/shop/buy/${item.id}`">
               <div class="figure-img">
                 <img :src="item.goodsPicUrl" alt="" />
@@ -50,8 +52,6 @@
 import $http from '@/utils/Axios'
 import { ref, defineProps, computed } from 'vue'
 import { goodsStore } from '@/store/goodsStore'
-const props = defineProps(['goods'])
-const store = goodsStore()
 interface Promo {
   id: string
   url: string
@@ -67,12 +67,19 @@ interface Goods {
 interface GoodsList {
   [index: number]: Goods
 }
-
+// 父组件传来的属性，商品的类型
+const props = defineProps(['goods'])
+// 仓库
+const store = goodsStore()
+// 商品展示区域侧边的商品列表
 const brickPromoList = ref<Promo[]>([])
+// 商品展示区域主体的商品列表
 const goodslist = ref<GoodsList[]>([])
+// 返回当前商品应该展示哪个列表的index
 const tabIndex = computed(() => {
   return store.tabState[props.goods]
 })
+// 发起请求获得侧边商品列表
 const getBrickPromolList = async () => {
   const { data: res } = await $http.get('/brickpromolist', {
     params: { classify: props.goods }
@@ -80,7 +87,7 @@ const getBrickPromolList = async () => {
   brickPromoList.value = res.res.res
 }
 getBrickPromolList()
-
+// 发起请求获得主题区域商品列表
 const getGoodsList = async () => {
   const {
     data: { res }

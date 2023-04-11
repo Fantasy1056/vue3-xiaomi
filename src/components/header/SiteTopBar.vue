@@ -1,4 +1,5 @@
 <template>
+  <!-- 顶部黑色的topbar区域 -->
   <div class="site-topbar">
     <div class="container">
       <div class="topbar-nav">
@@ -37,8 +38,10 @@ interface Nav {
   id: string
   text: string
 }
+// navbar内容数据和右侧用navvbar数据
 const navList = ref<Nav[]>([])
 const siteUserInfo = ref<Nav[]>([])
+// 发起请求获取
 const getNavList = async () => {
   const { data: res } = await $http.get('/toplist')
   navList.value = res.res

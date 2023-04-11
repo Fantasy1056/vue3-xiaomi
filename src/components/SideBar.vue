@@ -1,5 +1,7 @@
 <template>
+  <!-- 固定定位的侧边栏 -->
   <div class="side-bar">
+    <!-- 根据数据动态渲染 -->
     <a
       href="javascript:;"
       class="item"

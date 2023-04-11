@@ -1,7 +1,9 @@
 <template>
+  <!-- 抽屉中展示的商品栏 -->
   <div class="item-children">
     <div class="container">
       <ul class="item-list">
+        <!-- 根据数据动态渲染内容 -->
         <li
           v-for="(item, index) in drawerList"
           :key="item.id"

@@ -1,6 +1,7 @@
 <template>
   <div class="footer-service">
     <ul class="list-service">
+      <!-- 根据数据动态渲染 -->
       <li v-for="(s, index) in serviceList" :key="index">
         <a href="#">
           <svg

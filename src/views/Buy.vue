@@ -1,9 +1,12 @@
 <template>
+  <!-- 商品详情页面 -->
   <div class="buy">
+    <!-- 商品详情页头部组件 -->
     <ProductTitle
       :name="detailData.goodsname"
       :recommend="detailData.recommend.goodsname"
     ></ProductTitle>
+    <!--  商品详情页主体组件-->
     <ProductBox :detailData="detailData"></ProductBox>
   </div>
 </template>
@@ -55,7 +58,7 @@ const detailData = ref<DetailData>({
   id: 'xx',
   desc: 'xxx'
 })
-
+// 根据当前路由的params的id属性,发起请求获得对应id的商品数据
 $http
   .get('/goodsdetail', { params: { id: route.params.id } })
   .then(({ data: res }) => {

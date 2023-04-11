@@ -1,9 +1,11 @@
 <template>
+  <!-- 路由展示的主页区域 -->
   <div class="page-main home-main">
     <div class="container">
       <HomeBannerBox
         url="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/f2a2f0f25c8c84b288da3a5fdc500743.jpg?thumb=1&w=1226&h=120&f=webp&q=90"
       ></HomeBannerBox>
+      <!-- 根据商品属性列表循环渲染商品列表，并传入对应的属性 -->
       <HomeBrickBox
         :type="box.type"
         :goods="box.goods"

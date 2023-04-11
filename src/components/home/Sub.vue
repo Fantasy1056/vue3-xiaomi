@@ -52,29 +52,34 @@ interface ChannelList {
   text: string
   url: string
 }
+// 频道列表和商品列表数据
 const channelList = ref<ChannelList[]>([])
 const promoList = ref<Promo[]>([])
+// 决定哪个频道或者商品绑定高亮样式的index
 const highLightPromo = ref<string>('0')
 const highLightChannel = ref<string>('0')
-
+// 获取频道列表数据
 const getChannelList = async () => {
   const { data: res } = await $http.get('/homechannellist')
   channelList.value = res.res
 }
-getChannelList()
+// 获取商品列表数据
 const getPromolList = async () => {
   const { data: res } = await $http.get('/promolist', {
     params: { id: '1', name: 'wp' }
   })
   promoList.value = res.res
 }
-getPromolList()
+// 切换当前鼠标经过绑定高亮样式对应index的元素
 const highLightPro = (index: string) => {
   highLightPromo.value = index
 }
 const highLightCh = (index: string) => {
   highLightChannel.value = index
 }
+
+getChannelList()
+getPromolList()
 </script>
 
 <style lang="less" scoped>

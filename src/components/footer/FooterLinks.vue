@@ -3,6 +3,7 @@
     <div class="col-links col-links-frist">
       <dt></dt>
     </div>
+    <!-- 根据数据动态渲染 -->
     <div class="col-links" v-for="(link, index) in serviceList" :key="index">
       <dt>{{ link.dt }}</dt>
       <dd v-for="(dd, index) in link.dd" :key="index">{{ dd }}</dd>

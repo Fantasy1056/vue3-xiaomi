@@ -1,4 +1,5 @@
 <template>
+  <!-- 底部栏组件 -->
   <div class="site-footer">
     <div class="container">
       <FooterService></FooterService>

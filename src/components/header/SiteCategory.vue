@@ -1,6 +1,9 @@
 <template>
+  <!-- 顶部nav展示的sitebar -->
+  <!-- 因为这个侧边栏也要在商品详情页展示，所以包裹在头部nav组件里 -->
   <div class="site-category" v-if="route.meta.showSiteCategory">
     <ul class="site-category-list" @mouseleave="cateIndex = -1">
+      <!-- 根据数据动态展示侧边栏内容 -->
       <li
         class="site-category-item"
         v-for="(item, index) in categoryList"
@@ -11,6 +14,7 @@
           {{ item.text }}
           <el-icon><ArrowRightBold /></el-icon>
         </a>
+        <!-- 侧边栏项下的商品列表，鼠标经过时，展示对应边栏项index的商品列表 -->
         <div
           class="category-list"
           v-show="cateIndex === index"
@@ -46,19 +50,24 @@ interface Category {
 interface CategoryItem {
   [index: number]: Category
 }
+// 当前展示的商品栏index
 const cateIndex = ref<number>(-1)
+// 侧边栏列表数据
 const categoryList = ref<Nav[]>([])
+// 侧边栏商品栏数据
 const category = ref<CategoryItem[]>([])
 const route = useRoute()
-
+// 获取侧边栏数据
 const getCategoryList = async () => {
   const { data: res } = await $http.get('/categorylist')
   categoryList.value = res.res
 }
+// 获取商品数据
 const getCategory = async () => {
   const { data: res } = await $http.get('/category')
   category.value = res.res
 }
+// 鼠标经过改变要展示的index
 const showCateList = (index: number) => {
   cateIndex.value = index
 }

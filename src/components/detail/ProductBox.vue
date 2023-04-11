@@ -1,7 +1,9 @@
 <template>
   <div class="mi-detail">
+    <!-- 根据父组件传来的props动态渲染内容 -->
     <div class="product-box container">
       <div class="img-left">
+        <!-- 商品轮播图 -->
         <el-carousel height="560px">
           <el-carousel-item
             v-for="(item, index) in detailData.imgs"
@@ -12,6 +14,7 @@
         </el-carousel>
       </div>
       <div class="product-con">
+        <!-- 商品信息 -->
         <h2>{{ detailData.goodsname }}</h2>
         <p class="desc">
           <span style="color: #ff4a00"
@@ -32,7 +35,9 @@
             <p class="desc">有现货</p>
           </div>
         </div>
+        <!-- 商品选项 -->
         <div class="buy-options">
+          <!-- 根据数据动态渲染商品选项 -->
           <div
             class="buy-box-child"
             v-for="(option, index) in detailData.optionsInfo"
@@ -40,6 +45,7 @@
           >
             <div class="title">{{ option.title }}</div>
             <ul>
+              <!-- 选项点击后将当前点击的选项高亮 -->
               <li
                 v-for="(value, index) in option.info"
                 :key="index"
@@ -93,13 +99,14 @@ interface Info {
   isDefault: boolean
   price: number
 }
+// // 计算属性找到选项数据里被选择的数据项,返回价格
 const currentPrice = computed(() => {
   const res: Info = props.detailData.optionsInfo[0].info?.find(
     (item: Info) => item.isDefault
   )
   return res.price || 0
 })
-
+// 计算属性找到选项数据里被选择的数据项,返回拼接后的内容
 const selectedInfo = computed(() => {
   const { value: storage } = props.detailData.optionsInfo[0].info?.find(
     (item: Info) => item.isDefault
@@ -110,11 +117,13 @@ const selectedInfo = computed(() => {
 
   return props.detailData.goodsname + ' ' + storage + ' ' + color || ''
 })
-
+// 商品选项点击改变的方法
 const changeChoice = (option: Info[], index: number) => {
+  // 排他思想,先将所有的选项取消选择
   option.forEach((item) => {
     item.isDefault = false
   })
+  // 将被点击的选项选择
   option[index].isDefault = true
 }
 </script>

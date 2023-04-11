@@ -1,4 +1,5 @@
 <template>
+  <!-- 商城主页 -->
   <HomeHero></HomeHero>
   <Main></Main>
 </template>

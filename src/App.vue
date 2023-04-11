@@ -1,9 +1,11 @@
 <template>
+  <!-- 头部区域 -->
   <div class="header">
     <SiteTopbar></SiteTopbar>
     <SiteHeader></SiteHeader>
   </div>
   <router-view></router-view>
+  <!-- 底部和侧边栏区域 -->
   <Footer></Footer>
   <SideBar></SideBar>
 </template>

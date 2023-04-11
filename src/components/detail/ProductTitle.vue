@@ -2,6 +2,7 @@
   <div class="xm-product-box">
     <div class="nav-bar">
       <div class="container">
+        <!-- 根据父组件传来的props展示商品名称,和推荐商品名称 -->
         <h2>{{ name }}</h2>
         <div class="con">
           <div class="left"><span>|</span>{{ recommend }}</div>

@@ -15,6 +15,7 @@ interface Swiper {
   id: string
   url: string
 }
+// 发起请求存储轮播图数据
 const swiperList = ref<Swiper[]>([])
 const getSwiperList = async () => {
   const { data: res } = await $http.get('/swiperlist')
